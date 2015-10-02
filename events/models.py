@@ -1,9 +1,11 @@
 from django.db import models
 
-TYPES = (
-    (0, 'Default'),
-    (1, 'Events'),
-)
+class EventType(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    id = models.IntegerField(unique=True, primary_key=True)
+
+
+TYPES = ((event_type.id, event_type.name) for event_type in EventType.objects.all())
 
 
 class Events(models.Model):
