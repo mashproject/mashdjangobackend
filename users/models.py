@@ -28,6 +28,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     fb_profile = models.URLField(blank=True)
     profile_pic = models.ImageField(upload_to=user_image_path,blank=True)
     department = models.IntegerField(choices=DEPARTMENTS,null=True)
+#     about_user(mandatory)
+# fb_profile(mandatory)
+# linkedin_profile (mandatory)
+# twitter_profile (optional)
+# about.me_profile (optional)
 
     objects = UserManager()
 
