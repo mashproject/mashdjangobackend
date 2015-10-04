@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-import events
+from django.views.static import serve
+from mash_backend import settings
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^events/', include('events.urls')),
+    url(r'^users/', include('users.urls')),
+    url(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
 ]

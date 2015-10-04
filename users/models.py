@@ -1,3 +1,4 @@
+import os
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
 
@@ -7,6 +8,10 @@ from django.utils import timezone
 
 DEPARTMENTS = ((0, 'Technical'), (1,'Content'))
 
+def user_image_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    ext = '.'+filename.split('.')[-1]
+    return os.path.join('users', str(instance.id)+ext)
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), max_length=254, unique=True)
@@ -21,7 +26,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
                                                 'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     fb_profile = models.URLField(blank=True)
-    profile_pic = models.ImageField(blank=True)
+    profile_pic = models.ImageField(upload_to=user_image_path,blank=True)
     department = models.IntegerField(choices=DEPARTMENTS,null=True)
 
     objects = UserManager()
@@ -43,3 +48,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         "Returns the short name for the user."
         return self.first_name
+
+    def image_tag(self):
+        return u'<img src="%s" />' % self.profile_pic
+    image_tag.short_description = 'Image'
+    image_tag.allow_tags = True
+
