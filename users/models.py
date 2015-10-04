@@ -25,14 +25,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
                                     help_text=_('Designates whether this user should be treated as '
                                                 'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    fb_profile = models.URLField(blank=True)
+    fb_profile = models.URLField()
+    about_user=models.TextField()
+    linkedin_profile=models.URLField()
+    twitter_profile=models.URLField(blank=True)
+    about_me_profile=models.URLField(blank=True)
     profile_pic = models.ImageField(upload_to=user_image_path,blank=True)
     department = models.IntegerField(choices=DEPARTMENTS,null=True)
-#     about_user(mandatory)
-# fb_profile(mandatory)
-# linkedin_profile (mandatory)
-# twitter_profile (optional)
-# about.me_profile (optional)
+
 
     objects = UserManager()
 
