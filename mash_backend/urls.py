@@ -22,11 +22,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^events/', include('events.urls')),
     url(r'^users/', include('users.urls')),
-    url(r'^media/(?P<path>.*)$', serve, {
-        'document_root': settings.MEDIA_ROOT,
-    }),
-    url(r'^static/(?P<path>.*)$', serve, {
-        'document_root': settings.STATIC_ROOT,
-    }),
+
 
 ]

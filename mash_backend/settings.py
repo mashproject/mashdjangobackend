@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2l#w_&jnn%qf!zr+sre+n%y)c)%5smqw1lft13c%fiz-3rkwe%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'events',
-    'users'
+    'users',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,10 +95,6 @@ WSGI_APPLICATION = 'mash_backend.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_URL = '/static/'
-STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 
 DATABASES = {
     'default': {
@@ -125,4 +122,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
+                 'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+                 'Cache-Control': 'max-age=94608000',
+                 }
+AWS_STORAGE_BUCKET_NAME = 'mashglobal.org'
+AWS_ACCESS_KEY_ID = 'AKIAJMJWTX2EZ2COCCQQ'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'mash_backend.custom_storages.StaticStorage'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'mash_backend.custom_storages.MediaStorage'
