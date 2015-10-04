@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ('edit_date', models.DateField(auto_now=True, verbose_name=b'date edited')),
                 ('pub_date', models.DateField(null=True, verbose_name=b'date published')),
                 ('is_published', models.BooleanField(default=False)),
+                ('type_id', models.IntegerField(default=0, choices=[(0, b'Default'), (1, b'Events')])),
                 ('gallery_div', models.TextField()),
             ],
         ),

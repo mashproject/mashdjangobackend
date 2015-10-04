@@ -9,7 +9,7 @@ class RetrieveAll(ListAPIView):
     queryset = Events.objects.all()
     serializer_class = EventSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('is_published', 'type_id', 'id')
+    filter_fields = ('is_published', 'type_id', 'id',)
 
 # class RetrieveByIdView(RetrieveAPIView):
 #     queryset = Events.objects.all()

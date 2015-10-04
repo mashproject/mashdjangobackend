@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.templatetags.static import static
 from django.views.static import serve
 from mash_backend import settings
 
