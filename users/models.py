@@ -15,7 +15,7 @@ def user_image_path(instance, filename):
     return os.path.join('users', str(instance.id) + ext)
 
 
-class CustomUser(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), max_length=254, unique=True)
     username = models.CharField(max_length=50, unique=True, )
     first_name = models.CharField(_('first name'), max_length=30, blank=True)

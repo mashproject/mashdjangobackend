@@ -1,5 +1,5 @@
 from django.contrib.auth.admin import UserAdmin
-from users.models import CustomUser
+from users.models import User
 
 from django.contrib import admin
 from django.utils.translation import ugettext as _
@@ -31,4 +31,4 @@ class CustomUserAdmin(UserAdmin):
     #     return super(CustomUserAdmin,self).formfield_for_dbfield(db_field, **kwargs)
 
 
-admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(User, CustomUserAdmin)
