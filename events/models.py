@@ -37,4 +37,4 @@ class Events(models.Model):
     type_id = models.IntegerField(default=0, choices=EVENT_TYPE)
     gallery_div = models.TextField()
     url = models.URLField(null=True)
-    supporters = models.ManyToManyField(Supporters, null=True)
+    supporters = models.ManyToManyField(Supporters)
