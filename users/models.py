@@ -27,9 +27,9 @@ class User(AbstractBaseUser, PermissionsMixin):
                                     help_text=_('Designates whether this user should be treated as '
                                                 'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    fb_profile = models.URLField()
-    about_user = models.TextField()
-    linkedin_profile = models.URLField()
+    fb_profile = models.URLField(blank=True)
+    about_user = models.TextField(blank=True)
+    linkedin_profile = models.URLField(blank=True)
     twitter_profile = models.URLField(blank=True)
     about_me_profile = models.URLField(blank=True)
     profile_pic = models.ImageField(upload_to=user_image_path, blank=True)

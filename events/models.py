@@ -10,7 +10,7 @@ def image_path(instance, filename):
     return os.path.join(str(instance.__class__.__name__), str(image_id + ext))
 
 
-EVENT_TYPE = ((0, 'Open Dialogues'), (1, 'Mixers'), (2, 'Workshops'), (
+EVENT_TYPE = ((0, 'Default'), (1, 'Mixers'), (2, 'Workshops'), (
     3, 'Open Dialogues'), (4, 'Mash ups'), (5, 'Culture'))
 
 SUPPORTERS_TYPE = ((0, 'Organiser'), (1, 'Sponsors'))
@@ -33,11 +33,11 @@ class Event(models.Model):
     description = models.TextField()
     image_url = models.ImageField(upload_to=image_path, blank=True)
     edit_date = models.DateField('date edited', auto_now=True)
-    pub_date = models.DateField('date published', auto_now=False, null=True)
+    pub_date = models.DateField('date published', auto_now=False, null=True,blank=True)
     is_published = models.BooleanField(default=False)
     type_id = models.IntegerField(default=0, choices=EVENT_TYPE)
     gallery_div = models.TextField(blank=True)
-    location = models.CharField(max_length=50, null=True)
+    location = models.CharField(max_length=50, null=True,blank=True)
     regiteration_link = models.URLField(null=True,blank=True)
     url = models.URLField(null=True, blank=True)
-    supporters = models.ManyToManyField(Supporter)
+    supporters = models.ManyToManyField(Supporter,blank=True)
