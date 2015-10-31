@@ -15,7 +15,7 @@ EVENT_TYPE = ((0, 'Open Dialogues'), (1, 'Mixers'), (2, 'Workshops'), (
 SUPPORTERS_TYPE = ((0, 'Organiser'), (1, 'Sponsors'))
 
 
-class Supporters(models.Model):
+class Supporter(models.Model):
     title = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     description = models.TextField()
@@ -27,7 +27,7 @@ class Supporters(models.Model):
         return self.name
 
 
-class Events(models.Model):
+class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     image_url = models.ImageField(upload_to=image_path, blank=True)
@@ -36,5 +36,7 @@ class Events(models.Model):
     is_published = models.BooleanField(default=False)
     type_id = models.IntegerField(default=0, choices=EVENT_TYPE)
     gallery_div = models.TextField()
+    location = models.CharField(max_length=50,null=True)
+    regiteration_link= models.URLField(null=True)
     url = models.URLField(null=True)
-    supporters = models.ManyToManyField(Supporters, null=True)
+    supporters = models.ManyToManyField(Supporter)
