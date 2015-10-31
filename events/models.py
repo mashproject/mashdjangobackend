@@ -6,7 +6,8 @@ from django.db import models
 def image_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT,/user_<id>/<filename>
     ext = '.' + filename.split('.')[-1]
-    return os.path.join(str(instance.__class__.__name__), str(instance.id) + ext)
+    image_id = ''.join((instance.title.replace(' ', '_'), str(instance.type_id)))
+    return os.path.join(str(instance.__class__.__name__), str(image_id + ext))
 
 
 EVENT_TYPE = ((0, 'Open Dialogues'), (1, 'Mixers'), (2, 'Workshops'), (
@@ -18,10 +19,10 @@ SUPPORTERS_TYPE = ((0, 'Organiser'), (1, 'Sponsors'))
 class Supporter(models.Model):
     title = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     image_url = models.ImageField(upload_to=image_path, blank=True)
     type_id = models.IntegerField(default=0, choices=SUPPORTERS_TYPE)
-    url = models.URLField(null=True)
+    url = models.URLField(null=True,blank=True)
 
     def __unicode__(self):
         return self.name
@@ -35,8 +36,8 @@ class Event(models.Model):
     pub_date = models.DateField('date published', auto_now=False, null=True)
     is_published = models.BooleanField(default=False)
     type_id = models.IntegerField(default=0, choices=EVENT_TYPE)
-    gallery_div = models.TextField()
-    location = models.CharField(max_length=50,null=True)
-    regiteration_link= models.URLField(null=True)
-    url = models.URLField(null=True)
+    gallery_div = models.TextField(blank=True)
+    location = models.CharField(max_length=50, null=True)
+    regiteration_link = models.URLField(null=True,blank=True)
+    url = models.URLField(null=True, blank=True)
     supporters = models.ManyToManyField(Supporter)

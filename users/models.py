@@ -12,7 +12,7 @@ DEPARTMENTS = ((0, 'Technical'), (1, 'Communication'), (2, 'Events'), (
 def user_image_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     ext = '.' + filename.split('.')[-1]
-    return os.path.join('users', str(instance.id) + ext)
+    return os.path.join('users', str(instance.username) + ext)
 
 
 class User(AbstractBaseUser, PermissionsMixin):
