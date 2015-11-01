@@ -20,9 +20,11 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'department', 'profile_pic',)}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff')}),
+        (_('Permissions'), {'fields': ('is_active', 'is_staff',
+                                       'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
+    readonly_fields = ('date_joined', 'username', 'email', 'last_login')
     # def formfield_for_dbfield(self, db_field, **kwargs):
     #     if db_field.name == 'profile_pic':
     #         request = kwargs.pop("request", None)
