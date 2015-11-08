@@ -5,8 +5,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
-DEPARTMENTS = ((0, 'Technical'), (1, 'Communication'), (2, 'Events'), (
-    3, 'Human Resourse'), (4, 'Finance'), (5, 'Advisors'), (6, 'Admin'))
+DEPARTMENTS = ((0, 'Technical'), (1, 'Communication'), (2, 'Events'),
+               (3, 'Human Resourse'), (4, 'Finance'), (5, 'Advisors'),
+               (6, 'Admin'), (7, 'Community'), (8, 'Co-founder'),
+               (9, 'Intern'), (10, 'Ambassadors'), (11, 'Misc'))
 
 
 def user_image_path(instance, filename):
