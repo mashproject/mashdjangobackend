@@ -26,7 +26,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
-my.cnf
+mash_backend/my.cnf
 *.sqlite3
 *.idea/
 
@@ -61,4 +61,6 @@ coverage.xml
 docs/_build/
 
 # PyBuilder
-target/
+target/### Python template
+
+mash_backend/settings/prodution.py

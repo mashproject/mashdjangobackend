@@ -22,7 +22,7 @@ class Supporter(models.Model):
     description = models.TextField(blank=True)
     image_url = models.ImageField(upload_to=image_path, blank=True)
     type_id = models.IntegerField(default=0, choices=SUPPORTERS_TYPE)
-    url = models.URLField(null=True,blank=True)
+    url = models.URLField(null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -33,11 +33,11 @@ class Event(models.Model):
     description = models.TextField()
     image_url = models.ImageField(upload_to=image_path, blank=True)
     edit_date = models.DateField('date edited', auto_now=True)
-    pub_date = models.DateField('date published', auto_now=False, null=True,blank=True)
+    pub_date = models.DateField('date published', auto_now=False, null=True, blank=True)
     is_published = models.BooleanField(default=False)
     type_id = models.IntegerField(default=0, choices=EVENT_TYPE)
     gallery_div = models.TextField(blank=True)
-    location = models.CharField(max_length=50, null=True,blank=True)
-    regiteration_link = models.URLField(null=True,blank=True)
+    location = models.CharField(max_length=50, null=True, blank=True)
+    regiteration_link = models.URLField(null=True, blank=True)
     url = models.URLField(null=True, blank=True)
-    supporters = models.ManyToManyField(Supporter,blank=True)
+    supporters = models.ManyToManyField(Supporter, blank=True)

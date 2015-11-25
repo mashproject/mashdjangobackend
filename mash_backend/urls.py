@@ -13,16 +13,20 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+from django.utils.translation import ugettext_lazy
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.static import serve
-from mash_backend import settings
+from mash_backend.settings import base
+
+admin.site.site_title = ugettext_lazy('MASH site admin')
+admin.site.site_header = ugettext_lazy('MASH administration')
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^events/', include('events.urls')),
     url(r'^users/', include('users.urls')),
     url(r'^static/(?P<path>.*)$', serve, {
-        'document_root': settings.STATIC_ROOT,
+        'document_root': base.STATIC_ROOT,
     }),
 ]
