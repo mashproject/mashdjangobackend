@@ -63,3 +63,4 @@ docs/_build/
 # PyBuilder
 target/### Python template
 
+mash_backend/settings/production.py
