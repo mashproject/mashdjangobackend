@@ -17,7 +17,7 @@
             </p>
         {% endif %}
         {% csrf_token %}
-        {{ send_mail_form.as_p }}
+        {{ send_mail_form }}
         <input type="submit" value="Submit"/>
     </form>
 </div>
