@@ -38,11 +38,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'seacucumber',
     'multiupload',
     'events',
     'users',
     'storages',
-    'corsheaders'
+    'corsheaders',
+    'mail'
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -100,21 +103,21 @@ WSGI_APPLICATION = 'mash_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-#
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'OPTIONS': {
-#             'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
-#         },
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
+        },
+    }
+}
 
 
 # Internationalization
@@ -129,7 +132,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 LOGGING = {
     'version': 1,
