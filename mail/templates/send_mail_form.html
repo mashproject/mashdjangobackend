@@ -1,0 +1,24 @@
+{% extends "admin/base.html" %}
+{% load i18n admin_static %}
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
+
+
+{% block content %}
+<div id="content-main">
+    <form action="" method="post">
+        {% if send_errors %}
+            <p class="errornote">
+            {{ send_errors }}
+            </p>
+        {% endif %}
+        {% csrf_token %}
+        {{ send_mail_form.as_p }}
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+{% endblock %}

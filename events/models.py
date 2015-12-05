@@ -41,3 +41,14 @@ class Event(models.Model):
     regiteration_link = models.URLField(null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     supporters = models.ManyToManyField(Supporter, blank=True)
+
+class Image(models.Model):
+    file = models.FileField('File', upload_to='gallery/')
+    gallery = models.ForeignKey(Event, related_name='images', blank=True, null=True)
+
+    def __str__(self):
+        return self.filename
+
+    @property
+    def filename(self):
+        return self.file.name.rsplit('/', 1)[-1]
