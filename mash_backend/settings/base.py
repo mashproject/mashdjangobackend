@@ -120,6 +120,9 @@ DATABASES = {
     }
 }
 
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = "amqp://guest:guest@localhost:5672//"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

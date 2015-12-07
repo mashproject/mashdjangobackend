@@ -1,6 +1,7 @@
 from boto.ses import SESConnection
 
 from rest_framework.views import APIView
+from django.core.mail import EmailMultiAlternatives
 
 from django.shortcuts import render
 from mail.forms import SendMailForm
@@ -22,10 +23,13 @@ class SendMail(APIView):
                 emails = Mail.objects.all().values_list('email', flat=True)
             except Mail.DoesNotExist:
                 emails = []
-            connection.send_email(DEFAULT_EMAIL_SENDER, mail_form.cleaned_data['subject'],
-                                  mail_form.cleaned_data['body'], emails)
+            subject, from_email= 'hello', DEFAULT_EMAIL_SENDER
+            text_content = 'This is an important message.'
+            html_content = '<p>This is an <strong>important</strong> message.</p>'
+            msg = EmailMultiAlternatives(subject, text_content, from_email, emails)
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
             send_errors = dict(message='Triggered Func')
-
         else:
             send_errors = dict(message=mail_form.errors)
         return render(request, 'send_mail_form.html',
