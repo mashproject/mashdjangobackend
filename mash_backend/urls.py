@@ -22,7 +22,6 @@ from django.views.static import serve
 from mash_backend.settings import base
 
 # for fix to python on mac which is newer than the one on linux
-ssl._create_default_https_context = ssl._create_unverified_context
 admin.site.site_title = ugettext_lazy('MASH site admin')
 admin.site.site_header = ugettext_lazy('MASH administration')
 

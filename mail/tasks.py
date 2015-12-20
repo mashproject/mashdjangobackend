@@ -1,10 +1,19 @@
+import time
+
 from boto.ses import SESConnection
-from celery.task import task
+from mail.models import Mail
+from mash_backend.settings.base import MAX_MAILS_PER_SEC
 from mash_backend.settings.production import DEFAULT_EMAIL_SENDER, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 
 
-@task
-def send_mail_data(emails, mail_form):
+def send_mail_data(subject, body, format):
     connection = SESConnection(aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
-    connection.send_email(DEFAULT_EMAIL_SENDER, mail_form.cleaned_data['subject'],
-                                  mail_form.cleaned_data['body'], emails)
+    try:
+        emails = Mail.objects.all().values_list('email', flat=True)
+    except Mail.DoesNotExist:
+        emails = []
+    for i in range(0, len(emails), MAX_MAILS_PER_SEC):
+        to_addresses = emails[i:(i + MAX_MAILS_PER_SEC)]
+        connection.send_email(source=DEFAULT_EMAIL_SENDER, subject=subject, to_addresses=to_addresses, body=body,
+                              format=format)
+        time.sleep(1)
