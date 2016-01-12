@@ -14,6 +14,8 @@ def send_mail_data(subject, body, format):
         emails = []
     for i in range(0, len(emails), MAX_MAILS_PER_SEC):
         to_addresses = emails[i:(i + MAX_MAILS_PER_SEC)]
-        connection.send_email(source=DEFAULT_EMAIL_SENDER, subject=subject, to_addresses=to_addresses, body=body,
+        connection.send_email(source=DEFAULT_EMAIL_SENDER, subject=subject, body=body,
+                              to_addresses=DEFAULT_EMAIL_SENDER,
+                              bcc_addresses=to_addresses,
                               format=format)
         time.sleep(1)
