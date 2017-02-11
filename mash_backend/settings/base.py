@@ -38,10 +38,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'multiupload',
-    'events',
-    'users',
-    'storages',
     'corsheaders',
     'mail'
 
