@@ -1,20 +1,21 @@
 #!/bin/bash
 
 APPNAME=mash_backend
-APPDIR=/home/ubuntu/projects/mashdjangobackend/
+APPDIR=/home/ubuntu/workspace/mashdjangobackend/
 
 LOGFILE=$APPDIR'gunicorn.log'
 ERRORFILE=$APPFIR'gunicorn-error.log'
 
 NUM_WORKERS=3
 DJANGO_SETTINGS_MODULE=mash_backend.settings.production
-ADDRESS=0.0.0.0:8000
+ADDRESS=127.0.0.1:8000
 echo 'changing dir'
 cd $APPDIR
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 source ~/.bashrc
-source /usr/local/bin/virtualenvwrapper.sh
-workon $APPNAME
+#source /usr/local/bin/virtualenvwrapper.sh
+source ~/.virtualenvs/mailer/bin/activate
+#workon $APPNAME
 
 echo 'starting server' 
 exec gunicorn $APPNAME.wsgi:application \
