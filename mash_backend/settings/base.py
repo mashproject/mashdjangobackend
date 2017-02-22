@@ -55,7 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-AUTH_USER_MODEL = 'users.User'
+
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -72,10 +72,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -104,7 +100,7 @@ DATABASES = {
         'NAME': 'mash_backend',
         'USER': 'root',
         'PASSWORD': 'root',
-    }
+    },
 }
 
 
@@ -183,3 +179,4 @@ MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 DEFAULT_FILE_STORAGE = 'mash_backend.custom_storages.MediaStorage'
 MAX_MAILS_PER_SEC = 13
+DEFAULT_EMAIL_SENDER =''

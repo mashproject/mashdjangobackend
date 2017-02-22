@@ -27,8 +27,6 @@ admin.site.site_header = ugettext_lazy('MASH administration')
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^events/', include('events.urls')),
-    url(r'^users/', include('users.urls')),
     url(r'^static/(?P<path>.*)$', serve, {
         'document_root': base.STATIC_ROOT,
     }),
