@@ -15,7 +15,7 @@ class SendMail(APIView):
         mail_form = SendMailForm(request.POST)
         if mail_form.is_valid():
             send_mail_data(**mail_form.cleaned_data)
-            send_errors = dict(message='Triggered Maling')
+            send_errors = dict(message='Triggered Mailing')
         else:
             send_errors = dict(message=mail_form.errors)
         return render(request, 'send_mail_form.html',
