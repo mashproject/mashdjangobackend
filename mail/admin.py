@@ -1,10 +1,9 @@
 from django.conf.urls import url
 from django.contrib import admin
-
-# Register your models here.
 from django.core.urlresolvers import reverse
+
 from mail import views
-from mail.models import Mail
+from mail.models import Mail, Setting
 
 
 class SendMailAdmin(admin.ModelAdmin):
@@ -26,4 +25,9 @@ class SendMailAdmin(admin.ModelAdmin):
         return super(SendMailAdmin, self).changelist_view(request, extra_context)
 
 
+class SettingAdmin(admin.ModelAdmin):
+    list_display = ('key', 'value')
+
+
+admin.site.register(Setting, SettingAdmin)
 admin.site.register(Mail, SendMailAdmin)
